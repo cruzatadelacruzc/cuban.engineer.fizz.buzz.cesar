@@ -7,9 +7,11 @@ class FizzBuzzTest extends TestCase
 {
 
     protected $default_sequence;
+    protected $fizzbuzz;
 
     protected function setUp(): void
     {
+        $this->fizzbuzz = new FizzBuzz();
         $this->default_sequence = [
             0 => 1,
             1 => 2,
@@ -52,8 +54,7 @@ class FizzBuzzTest extends TestCase
      */
     public function testArrayOfIsMatching()
     {
-        $fizzbuzz = new FizzBuzz();
-        $this->assertEquals($this->default_sequence, $fizzbuzz->runFizzBuzz(1,30));
+        $this->assertEquals($this->default_sequence, $this->fizzbuzz->runFizzBuzz(1,30));
     }
 
     /**
@@ -61,8 +62,7 @@ class FizzBuzzTest extends TestCase
      */
     public function testArrayOfIsNotMatching()
     {
-        $fizzbuzz = new FizzBuzz();
-        $this->assertNotEquals($this->default_sequence, $fizzbuzz->runFizzBuzz(1,15));
+        $this->assertNotEquals($this->default_sequence, $this->fizzbuzz->runFizzBuzz(1,15));
     }
 
 }
