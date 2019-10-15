@@ -5,48 +5,57 @@ namespace App;
 
 
 
-use LogicException;
-
 class FizzBuzz
 {
+
     /**
-     *  Generator of sequence, like a range function.
-     * @param int $start
-     * @param int $end
-     * @return iterable
+     * Check if number is divisible by three,
+     * in this case return true or false otherwise
+     * @param int $number
+     * @return bool
      */
-    public function generatorSequence(int $start, int $end) : iterable
+    public function isFizz(int $number): bool
     {
-        /**End{@var $end} must be greater than zero as a consequence of these checks*/
-        if( $start <= 0 ) {
-            throw new LogicException("Start must be above zero");
-        }
+        return $number % 3 == 0;
+    }
 
-        if ( $start >= $end ) {
-            throw new LogicException("Start must be less than End");
-        }
+    /**
+     * Check if number is divisible by five,
+     * in this case return true or false otherwise
+     * @param int $number
+     * @return bool
+     */
+    public function isBuzz(int $number): bool
+    {
+        return $number % 5 == 0;
+    }
 
-        for( $i = $start; $i <= $end; $i++ ) {
-            yield $i;
-        }
+    /**
+     * Check if number is divisible by fifteen,
+     * in this case return true or false otherwise
+     * @param int $number
+     * @return bool
+     */
+    public function isFizzBuzz(int $number): bool
+    {
+        return $number % 15 == 0;
     }
 
     /**
      * Run FizzBuzz code
-     * @param int $start
-     * @param int $end
+     * @param iterable $sequence
      * @return iterable
      */
-    function runFizzBuzz(int $start = 1, int $end = 100): iterable {
-        $sequence = $this->generatorSequence($start, $end);
+    function runFizzBuzz(iterable $sequence): iterable
+    {
         $result = [];
         foreach ($sequence as $value) {
-            if ($value % 15 == 0 ) {
-                $result[]= 'FizzBuzz';
-            } elseif ($value % 5 == 0 ) {
-                $result[]= 'Buzz';
-            } elseif ( $value % 3 == 0 ) {
-                $result[]= 'Fizz';
+            if ($this->isFizzBuzz($value)) {
+                $result[] = 'FizzBuzz';
+            } elseif ($this->isBuzz($value)) {
+                $result[] = 'Buzz';
+            } elseif ($this->isFizz($value)) {
+                $result[] = 'Fizz';
             } else {
                 $result[] = $value;
             }
