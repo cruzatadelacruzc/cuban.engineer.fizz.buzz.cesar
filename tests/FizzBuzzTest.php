@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use App\FizzBuzz;
+use PHPUnit\Framework\TestCase;
 
 class FizzBuzzTest extends TestCase
 {
@@ -13,72 +13,14 @@ class FizzBuzzTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->default_sequence = $this->generatorSequence(1,30);
+        $this->default_sequence = $this->generatorSequence(1,15);
         $this->fizzbuzz = new FizzBuzz();
-        $this->sequence_ok = [
-            0 => 1,
-            1 => 2,
-            2 => 'Fizz',
-            3 => 4,
-            4 => 'Buzz',
-            5 => 'Fizz',
-            6 => 7,
-            7 => 8,
-            8 => 'Fizz',
-            9 => 'Buzz',
-            10 => 11,
-            11 => 'Fizz',
-            12 => 13,
-            13 => 14,
-            14 => 'FizzBuzz',
-            15 => 16,
-            16 => 17,
-            17 => 'Fizz',
-            18 => 19,
-            19 => 'Buzz',
-            20 => 'Fizz',
-            21 => 22,
-            22 => 23,
-            23 => 'Fizz',
-            24 => 'Buzz',
-            25 => 26,
-            26 => 'Fizz',
-            27 => 28,
-            28 => 29,
-            29 => 'FizzBuzz'
-        ];
-        $this->sequence_bad = [
-            0 => 1,
-            1 => 2,
-            2 => 'Fizz',
-            3 => 'Fizz', // wrong value
-            4 => 'Buzz',
-            5 => 'FizzBuzz', // wrong value
-            6 => 7,
-            7 => 'Buzz', // wrong value
-            8 => 'Fizz',
-            9 => 'Buzz',
-            10 => 11,
-            11 => 'Fizz',
-            12 => 'Fizz', // wrong value
-            13 => 14,
-            14 => 'Fizz', // wrong value
-            15 => 16,
-            16 => 17,
-            17 => 'Fizz',
-            18 => 19,
-            19 => 'Buzz',
-            20 => 'Fizz',
-            21 => 22,
-            22 => 23,
-            23 => 'Fizz',
-            24 => 'Buzz',
-            25 => 26,
-            26 => 'Fizz',
-            27 => 28,
-            28 => 29,
-            29 => 'Fizz' // wrong value
-        ];
+        // sequence with right values
+        $this->sequence_ok = array(0 => 1,1 => 2,2 => 'Fizz',3 => 4,4 => 'Buzz',5 => 'Fizz',6 => 7,7 => 8,8 => 'Fizz',
+            9 => 'Buzz',10 => 11,11 => 'Fizz',12 => 13,13 => 14,14 => 'FizzBuzz');
+        // sequence with wrong value
+        $this->sequence_bad = array(0 => 1,1 => 2,2 => 'Fizz',3 => 'Fizz',4 => 'Buzz',5 => 'FizzBuzz',6 => 7,7 => 'Buzz',
+            8 => 'Fizz',9 => 'Buzz',10 => 11,11 => 'Fizz',12 => 'Fizz',13 => 14,14 => 'Fizz');
     }
 
     /**
@@ -87,17 +29,15 @@ class FizzBuzzTest extends TestCase
      * @param int $end
      * @return iterable
      */
-    protected function generatorSequence(int $start, int $end): iterable
+    protected function generatorSequence(int $start,int $end): iterable
     {
         /**End{@var $end } must be greater than zero as a consequence of these checks*/
         if ($start <= 0) {
             throw new LogicException("Start must be above zero");
         }
-
         if ($start >= $end) {
             throw new LogicException("Start must be less than End");
         }
-
         for ($i = $start; $i <= $end; $i++) {
             yield $i;
         }
@@ -162,7 +102,7 @@ class FizzBuzzTest extends TestCase
      */
     public function testArrayOfIsMatching()
     {
-        $this->assertEquals($this->sequence_ok, $this->fizzbuzz->runFizzBuzz($this->default_sequence));
+        $this->assertEquals($this->sequence_ok,$this->fizzbuzz->runFizzBuzz($this->default_sequence));
     }
 
     /**
@@ -170,7 +110,7 @@ class FizzBuzzTest extends TestCase
      */
     public function testArrayOfIsNotMatching()
     {
-        $this->assertNotEquals($this->sequence_bad, $this->fizzbuzz->runFizzBuzz($this->default_sequence));
+        $this->assertNotEquals($this->sequence_bad,$this->fizzbuzz->runFizzBuzz($this->default_sequence));
     }
 
 }
